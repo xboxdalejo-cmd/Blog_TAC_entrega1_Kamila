@@ -1,0 +1,1483 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Blog TAC — Kamila y Junior</title>
+
+<style>
+/* --------------------------
+   ESTILOS GENERALES
+--------------------------- */
+body{
+  background:#0b0f19;
+  color:#e2e8f0;
+  font-family:Inter,Arial;
+  margin:0;
+}
+header{
+  background:linear-gradient(90deg,#6e4dff,#3f22c0);
+  padding:20px;
+  color:#fff;
+}
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:20px;
+}
+nav{
+  display:flex;
+  gap:10px;
+  margin-top:15px;
+}
+.btn{
+  background:#1a294b;
+  padding:8px 12px;
+  border-radius:8px;
+  border:0;
+  color:white;
+  font-weight:600;
+  cursor:pointer;
+}
+.btn:hover{
+  background:#2f00ff;
+}
+section{
+  background:#121826;
+  margin:20px 0;
+  padding:20px;
+  border-radius:14px;
+  box-shadow:0 4px 18px rgba(0,0,0,.3);
+}
+.hidden{display:none}
+
+h2{margin-top:0}
+
+/* --------------------------
+   GRID JUEGO 5×5
+--------------------------- */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px;
+}
+
+/* --------------------------
+   TARJETAS DEL JUEGO
+--------------------------- */
+.card-face{
+  position:relative;
+  padding-top:100%;
+  border-radius:10px;
+  cursor:pointer;
+  perspective:800px;
+}
+.card-inner{
+  position:absolute;
+  inset:0;
+  transform-style:preserve-3d;
+  transition:.45s;
+}
+.card.flipped .card-inner{
+  transform:rotateY(180deg);
+}
+.card-front,.card-back{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:10px;
+  font-weight:700;
+  backface-visibility:hidden;
+  padding:6px;
+  text-align:center;
+}
+.card-front{
+  background:#1f2937;
+  color:#4dd5ff;
+  border:1px solid rgba(0,198,255,.4);
+}
+.card-back{
+  background:#0b1727;
+  border:1px solid #293548;
+  transform:rotateY(180deg);
+}
+.matched .card-inner{
+  opacity:.3;
+  transform:scale(.85);
+}
+
+/* --------------------------
+   PRESENTACIÓN INICIO
+--------------------------- */
+.playerbox{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+}
+.player{
+  flex:1;
+  background:#121826;
+  padding:15px;
+  border-radius:14px;
+  text-align:center;
+}
+.player img{
+  width:180px;
+  height:180px;
+  border-radius:10px;
+  border:3px solid #4dd5ff;
+  object-fit:cover;
+}
+
+.player p{
+  color:#aeb6c2;
+  font-style:italic;
+}
+
+/* --------------------------
+   CAJA TAC (ENTRADA 2)
+--------------------------- */
+.tac-box {
+  font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+  max-width: 750px;
+  margin: 25px auto;
+  padding: 25px 30px;
+  background:#121826;
+  border-radius: 12px;
+  color: #ffffff;
+  line-height: 1.6;
+}
+.tac-box ol {
+  padding-left: 22px;
+  margin: 0;
+}
+.tac-box li {
+  margin-bottom: 18px;
+  padding: 12px 14px;
+  background: #051833;
+  border-left: 4px solid #1a3d7c;
+  border-radius: 6px;
+}
+.tac-box strong {
+  font-size: 18px;
+  color: #cdf7ff;
+}
+.tac-box span {
+  color: #888888;
+}
+.tac-box em {
+  color: #ffffff;
+  font-style: normal;
+  font-weight: 600;
+}
+</style>
+</head>
+
+<body>
+<header class="container">
+<h1>Blog Interactivo TAC — Kamila y Junior</h1>
+
+<nav>
+<button class="btn" onclick="show('inicio')">Inicio</button>
+<button class="btn" onclick="show('e0')">¿Qué son las TAC?</button>
+<button class="btn" onclick="show('e1')">Herramientas</button>
+<button class="btn" onclick="show('e2')">Experiencias</button>
+<button class="btn" onclick="show('final')">Final</button>
+<button class="btn" onclick="show('recursos')">Recursos y Bibliografía</button>
+</nav>
+</header>
+
+<div class="container">
+<!-- Secciones: Inicio, ¿Qué son las TAC?, Herramientas, Experiencias, Final -->
+<section id="inicio">
+  <div class="playerbox">
+    <div class="player">
+      <img src="img/Kamila.png" alt="Kamila">
+      <h3>Kamila Bonilla</h3>
+      <p>"Si un problema tiene solución ¿para qué preocuparse? y si no lo tiene, ¿para qué preocuparse?"</p>
+    </div>
+
+    <div class="player">
+      <img src="img/Junior.png" alt="Junior">
+      <h3>Junior Solano</h3>
+      <p>"Se aprende poco con la victoria, en cambio mucho con la derrota."</p>
+    </div>
+  </div>
+
+ <h2>🙋‍♀️ Bienvenidos a nuestro Blog Interactivo sobre TAC</h2>
+<p>¡Hola a todos! Somos Bonilla y Junior, estudiantes de Ingeniería en Mecatrónica, y estamos emocionados de compartir con ustedes nuestro blog interactivo sobre las Tecnologías del Aprendizaje y el Conocimiento (TAC). A lo largo de este blog, exploraremos diversas herramientas digitales que facilitan el aprendizaje, compartiremos nuestras experiencias personales y les presentaremos un divertido juego interactivo relacionado con las TAC.</p>
+<p>Las TAC son fundamentales en la educación moderna, ya que permiten a los estudiantes acceder a
+    recursos educativos de manera más eficiente y atractiva. A través de este blog, esperamos brindarles una comprensión más profunda de cómo las TAC pueden transformar el proceso de aprendizaje.</p>
+<p>¡Esperamos que disfruten explorando nuestro blog tanto como nosotros disfrutamos creándolo!</p>
+</section>
+
+<section id="e0" class="hidden">
+  <h2>🙋‍♂️¿Qué son las TAC?</h2>
+<p>Las TAC 'Tecnología del Aprendizaje y el Conocimiento' son el conjunto de herramientas digitales diseñadas específicamente para mejorar, potenciar y transformar los procesos de aprendizaje.<p>
+
+<p>A diferencia de las TIC, que se enfocan en la información y la comunicación, las TAC ponen el énfasis en cómo aprender mejor usando la tecnología.
+Su propósito es convertir la tecnología en un recurso pedagógico que facilite comprender, crear, investigar y colaborar.<p>
+
+<p>En otras palabras:
+👉 Las TAC no solo usan tecnología; la convierten en una aliada del aprendizaje significativo.</p>
+</p>📘 Ejemplos aplicados al aprendizaje</p>
+<p>1. 👨🏻‍🏫Plataformas educativas<p>
+
+<p>Herramientas como Moodle, Classroom o Edmodo permiten organizar actividades, enviar tareas y recibir retroalimentación.
+Ejemplo: un profesor sube cuestionarios interactivos y el estudiante ve su progreso en tiempo real.<p>
+
+</p>2. 📶Contenidos digitales interactivos</p>
+
+<p>Videos, simuladores, animaciones, laboratorios virtuales o infografías.
+Ejemplo: un estudiante de mecatrónica usa un simulador para probar un circuito antes de montarlo físicamente.<p>
+
+</p>3. 🧰Herramientas de colaboración</p>
+
+<p>Documentos compartidos, pizarras digitales y foros.
+Ejemplo: un equipo de estudiantes diseña un proyecto mecánico trabajando juntos en un documento en línea.</p>
+
+</p>4. 💻Apps para el aprendizaje autónomo.</p>
+
+<p>Aplicaciones que permiten estudiar idiomas, matemáticas, programación o electrónica.
+Ejemplo: usar una app de realidad aumentada para visualizar cómo fluye la corriente en un circuito.</p>
+
+</p>5. 📄Evaluaciones digitales</p>
+
+<p>Quizzes automáticos, rúbricas digitales, exámenes interactivos.
+Ejemplo: el profesor aplica una evaluación en línea y el sistema califica de inmediato.</p>
+<p>En resumen, las TAC son herramientas tecnológicas diseñadas para hacer el aprendizaje más efectivo, interactivo y accesible, adaptándose a las necesidades de los estudiantes y facilitando la labor de los educadores.</p>
+
+</section>
+<section id="e1" class="hidden">
+<h2>Herramientas TAC</h2>
+<!-- Snippet -->
+<div class="tac-box">
+  <ol>
+    <li>
+      <strong>Google Classroom</strong><br>
+      <span>Plataforma para organizar clases, tareas y evaluaciones.</span><br>
+      <em>Ventaja:</em> centraliza todo y mejora la comunicación.<br>
+      <em>Cómo lo uso:</em> revisar guías y entregar trabajos.
+    </li>
+
+    <li>
+      <strong>Simuladores (Proteus, Tinkercad, Multisim)</strong><br>
+      <span>Permiten diseñar y probar circuitos de manera virtual.</span><br>
+      <em>Ventaja:</em> pruebas rápidas y sin riesgo.<br>
+      <em>Cómo lo uso:</em> simular montajes antes del laboratorio.
+    </li>
+
+    <li>
+      <strong>Plataformas de video y MOOC (YouTube EDU, Khan Academy)</strong><br>
+      <span>Lecciones visuales y cursos completos en línea.</span><br>
+      <em>Ventaja:</em> aprender a tu ritmo.<br>
+      <em>Cómo lo uso:</em> reforzar conceptos difíciles.
+    </li>
+
+    <li>
+      <strong>Google Drive</strong><br>
+      <span>Almacenamiento y edición colaborativa en la nube.</span><br>
+      <em>Ventaja:</em> acceso desde cualquier dispositivo.<br>
+      <em>Cómo lo uso:</em> informes y trabajos compartidos del equipo.
+    </li>
+
+    <li>
+      <strong>Pizarras digitales (Jamboard, Miro)</strong><br>
+      <span>Tableros virtuales para esquemas, mapas mentales y planificación.</span><br>
+      <em>Ventaja:</em> visual y colaborativo.<br>
+      <em>Cómo lo uso:</em> planear proyectos y diagramas de circuitos.
+    </li>
+  </ol>
+</div>
+
+<style>
+  .tac-box {
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+    max-width: 750px;
+    margin: 25px auto;
+    padding: 25px 30px;
+    background:#121826;
+    border-radius: 12px;
+    color: #ffffff;
+    line-height: 1.6;
+  }
+
+  .tac-box h2 {
+    margin-top: 0;
+    font-size: 26px;
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+  }
+
+  .tac-box ol {
+    padding-left: 22px;
+    margin: 0;
+  }
+
+  .tac-box li {
+    margin-bottom: 18px;
+    padding: 12px 14px;
+    background: #051833;
+    border-left: 4px solid #1a3d7c;
+    border-radius: 6px;
+  }
+
+  .tac-box strong {
+    font-size: 18px;
+    color: #cdf7ff;
+  }
+
+  .tac-box span {
+    color: #888888;
+  }
+
+  .tac-box em {
+    color: #ffffff;
+    font-style: normal;
+    font-weight: 600;
+  }
+</style>
+<!-- Fin del snippet TAC -->
+
+</section>
+<section id="e2" class="hidden">
+  <h2>📘 Mi experiencia aprendiendo con TAC</h2>
+
+  <p>
+    Durante este proyecto pude experimentar de forma directa cómo las 
+    <strong>Tecnologías para el Aprendizaje y el Conocimiento (TAC)</strong> 
+    enriquecen el estudio, especialmente en áreas técnicas como Mecatrónica.  
+    Las herramientas digitales no solo facilitaron la organización, sino que hicieron el proceso mucho más dinámico,
+    flexible y visual.
+  </p>
+
+  <h3>✨ Reflexión personal</h3>
+  <p>
+    Las TAC cambiaron mi forma de estudiar. Antes veía la tecnología como un simple apoyo, 
+    pero ahora la entiendo como una guía estructurada para aprender mejor, más rápido y con más claridad.
+    El poder acceder a recursos visuales, simuladores y plataformas colaborativas me ayudó a comprender
+    temas complejos de una manera más intuitiva.
+  </p>
+
+  <h3>📚 ¿Qué aprendí?</h3>
+  <ul>
+    <li>Aprendí a utilizar herramientas de colaboración como Google Drive para trabajar en equipo de manera ordenada.</li>
+    <li>Me familiaricé con simuladores que permiten probar ideas antes de implementarlas físicamente.</li>
+    <li>Desarrollé habilidades para crear contenidos digitales más claros y visuales con herramientas como Canva y Genially.</li>
+    <li>Comprendí cómo las TAC pueden estructurar el aprendizaje para hacerlo más significativo.</li>
+  </ul>
+
+  <h3>⚙️ Retos durante el aprendizaje</h3>
+  <ul>
+    <li>Adaptarme a nuevas plataformas que no había usado antes.</li>
+    <li>Mantener una organización digital constante sin perder archivos o versiones.</li>
+    <li>Aprender a combinar herramientas según la necesidad del proyecto.</li>
+    <li>Gestionar el trabajo colaborativo en línea con tiempos diferentes.</li>
+  </ul>
+
+  <h3>🚀 ¿Qué herramientas seguiré usando?</h3>
+  <p>Después de este proyecto, estoy segura de que seguiré utilizando estas herramientas TAC:</p>
+  <ul>
+    <li><strong>Google Drive / Docs</strong> — para trabajos colaborativos y organización.</li>
+    <li><strong>Canva</strong> — para presentaciones, portadas y evidencia visual.</li>
+    <li><strong>Genially</strong> — para actividades interactivas y proyectos dinámicos.</li>
+    <li><strong>Miro</strong> — para mapas mentales y planificación de proyectos.</li>
+    <li><strong>Simuladores</strong> como Proteus o Tinkercad — para validar ideas antes del laboratorio.</li>
+  </ul>
+
+  <p style="margin-top:12px; color:#cd85fd; font-weight:600;">
+    "Las TAC no solo me hicieron la tarea y me ayudaron a aprender… también me enseñaron a aprender mejor."
+  </p>
+</section>
+
+<!-- 🔥🔥🔥 RESUMEN AGREGADO AQUÍ 🔥🔥🔥 -->
+<section id="final" class="hidden">
+
+  <h2 style="text-align:center;font-size:32px;color:#7dd3fc;margin-bottom:15px;">
+    🎓 Proyecto Final TAC — Reflexión Integral
+  </h2>
+
+  <div style="
+    background:#0f172a;
+    padding:30px;
+    border-radius:18px;
+    border:1px solid #1e3a5f;
+    box-shadow:0 0 30px rgba(0,0,0,0.35);
+    color:#cbd5e1;
+    line-height:1.7;
+    max-width:900px;
+    margin:auto;
+  ">
+
+    <h3 style="color:#93c5fd;font-size:26px;margin-bottom:12px;">📘 Resumen General del Aprendizaje</h3>
+    <p>
+      Durante el desarrollo de este proyecto TAC, logramos comprender de manera profunda cómo las
+      <strong style="color:#c084fc">Tecnologías para el Aprendizaje y el Conocimiento</strong>
+      transforman los métodos tradicionales de estudio, permitiendo experiencias más personalizadas,
+      dinámicas y significativas. Los recursos digitales no solo facilitan el acceso a la información,
+      sino que potencian nuestra autonomía y creatividad dentro del proceso educativo.
+    </p>
+
+    <h3 style="color:#93c5fd;font-size:26px;margin-top:25px;">🧠 ¿Qué aprendimos?</h3>
+    <ul style="padding-left:20px;margin-top:10px;">
+      <li>Comprendimos la diferencia entre TIC (información) y TAC (aprendizaje transformador).</li>
+      <li>Identificamos herramientas que mejoran la colaboración, práctica y evaluación académica.</li>
+      <li>Aprendimos el valor del trabajo autónomo apoyado en recursos digitales.</li>
+      <li>Desarrollamos habilidades para analizar, seleccionar e integrar herramientas educativas online.</li>
+    </ul>
+
+    <h3 style="color:#93c5fd;font-size:26px;margin-top:25px;">⚙️ ¿Qué retos tuvimos?</h3>
+    <ul style="padding-left:20px;margin-top:10px;">
+      <li>Gestionar múltiples plataformas sin perder organización.</li>
+      <li>Adaptarnos a herramientas nuevas con interfaces diferentes.</li>
+      <li>Filtrar información confiable entre tantas opciones digitales.</li>
+      <li>Coordinar procesos colaborativos a distancia.</li>
+    </ul>
+
+    <h3 style="color:#93c5fd;font-size:26px;margin-top:25px;">🚀 ¿Qué herramientas seguiremos usando?</h3>
+    <p>Estas se convirtieron en pilares de nuestro aprendizaje digital:</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px;margin-top:15px;">
+
+      <div style="
+        background:#1e293b;
+        padding:16px;
+        border-radius:12px;
+        border:1px solid #2f3f5a;
+      ">
+        <h4 style="color:#7dd3fc;margin:0 0 8px;">Google Classroom</h4>
+        <p style="color:#a7b4c9;">Organización total de cursos, tareas y retroalimentación.</p>
+      </div>
+
+      <div style="
+        background:#1e293b;
+        padding:16px;
+        border-radius:12px;
+        border:1px solid #2f3f5a;
+      ">
+        <h4 style="color:#7dd3fc;margin:0 0 8px;">Genially</h4>
+        <p style="color:#a7b4c9;">Creación de recursos interactivos impactantes y didácticos.</p>
+      </div>
+
+      <div style="
+        background:#1e293b;
+        padding:16px;
+        border-radius:12px;
+        border:1px solid #2f3f5a;
+      ">
+        <h4 style="color:#7dd3fc;margin:0 0 8px;">Miro</h4>
+        <p style="color:#a7b4c9;">Trabajo colaborativo visual y mapas conceptuales.</p>
+      </div>
+
+      <div style="
+        background:#1e293b;
+        padding:16px;
+        border-radius:12px;
+        border:1px solid #2f3f5a;
+      ">
+        <h4 style="color:#7dd3fc;margin:0 0 8px;">Google Drive</h4>
+        <p style="color:#a7b4c9;">Almacenamiento seguro y trabajo en equipo en tiempo real.</p>
+      </div>
+
+    </div>
+
+    <h3 style="color:#93c5fd;font-size:26px;margin-top:35px;">💬 Conclusión Reflexiva</h3>
+    <p>
+      Las TAC representan un puente entre el conocimiento tradicional y las nuevas exigencias del mundo
+      digital. Este proyecto nos permitió no solo aprender herramientas, sino comprender su valor
+      pedagógico y cómo transforman —de forma real— la manera en que aprendemos, colaboramos y
+      desarrollamos pensamiento crítico.  
+      <br><br>
+      El futuro de la educación está aquí, y ahora sabemos cómo aprovecharlo.
+    </p>
+
+  </div>
+  <p style="margin-top:20px;color:#7dd3fc;font-weight:600;text-align:center;">
+      ✨ Las TAC representan el futuro de la educación moderna, flexible y significativa ✨
+    </p>
+  </div>
+
+</section>
+
+
+</section>
+</section>
+<!-- Juego Kamila (HTML) y espacio para Juego Junior + Recursos -->
+<section id="juegoK" class="hidden">
+
+  <h2 style="text-align:center;color:#7dd3fc;font-size:34px;margin-bottom:10px;">
+    🎮 Memoria TAC — Creado por <span style="color:#c084fc">Kamila Bonilla</span>
+  </h2>
+
+  <!-- 🌟 TARJETA DE INICIO SUPER ESTÉTICA -->
+  <div id="startK" style="
+      background:linear-gradient(135deg,#101b2d,#0b1220);
+      padding:35px;
+      margin-top:20px;
+      border-radius:18px;
+      border:1px solid rgba(120,150,255,0.25);
+      box-shadow:0 0 25px rgba(0,0,0,0.55);
+      text-align:center;
+      animation:fadeIn .6s ease-out;
+  ">
+      <h2 style="font-size:28px;color:#93c5fd;margin-bottom:8px">¿Lista para jugar? 🎯</h2>
+
+      <p style="color:#b4bfd7;font-size:16px;max-width:550px;margin:auto;line-height:1.6;">
+        Este es un juego educativo de memoria donde deberás encontrar las 
+        <strong style="color:#c084fc">parejas de conceptos TAC</strong> 
+        en un tablero 5×5. Incluye:
+      </p>
+
+      <ul style="
+          list-style:none;
+          padding:0;
+          margin-top:18px;
+          color:#9db4d6;
+          font-size:16px;
+          line-height:1.6;
+      ">
+        <li>✔️ <strong>12 pares de conceptos TAC</strong></li>
+        <li>✨ <strong>1 carta BONUS</strong> con pista inteligente</li>
+        <li>⏱️ Contador de tiempo automático</li>
+        <li>🏅 Tabla de récords con tus mejores tiempos</li>
+      </ul>
+
+      <!-- Botón iniciar -->
+      <button onclick="startGameScreenK()" 
+        style="
+          margin-top:22px;
+          padding:12px 24px;
+          font-size:18px;
+          border-radius:12px;
+          border:none;
+          cursor:pointer;
+          background:#3b82f6;
+          box-shadow:0 0 18px rgba(59,130,246,0.5);
+          font-weight:700;
+          color:white;
+          transition:.25s;
+      "
+      onmouseover="this.style.transform='scale(1.06)'"
+      onmouseout="this.style.transform='scale(1)'">
+        🚀 Iniciar juego
+      </button>
+  </div>
+
+  <!-- 🌟 ÁREA DEL JUEGO (OCULTA HASTA QUE INICIE) -->
+  <div id="gameAreaK" class="hidden" style="animation:fadeIn .6s ease-out;">
+
+      <div style="display:flex;gap:20px;justify-content:center;margin:20px 0;flex-wrap:wrap">
+        <div style="background:#1b263b;padding:12px 18px;border-radius:14px">⏱️ Tiempo: <strong id="timerK">00:00</strong></div>
+        <div style="background:#1b263b;padding:12px 18px;border-radius:14px">🎯 Movimientos: <strong id="movesK">0</strong></div>
+        <div style="background:#1b263b;padding:12px 18px;border-radius:14px">✅ Pares: <strong id="matchesK">0</strong>/12</div>
+      </div>
+
+      <div id="boardK" class="grid" aria-live="polite" role="application"
+        style="animation:fadeIn .8s ease-out"></div>
+
+      <div style="display:flex;gap:10px;justify-content:center;margin-top:15px">
+        <button class="btn" id="restartK">🔄 Reiniciar</button>
+        <button class="btn" id="hintK">💡 Pista</button>
+        <button class="btn" id="saveK">💾 Guardar tiempo</button>
+      </div>
+
+      <div class="leaderboard" style="margin-top:30px;text-align:center;">
+        <h4 style="color:#c084fc;font-size:20px;">🏆 Top 3 mejores tiempos</h4>
+        <ol id="top3K" style="color:#aeb6c2;margin-left:18px;font-size:16px"></ol>
+      </div>
+
+  </div>
+
+</section>
+
+<!-- 🌟 Animación suave -->
+<style>
+@keyframes fadeIn {
+  from {opacity:0; transform: translateY(8px);}
+  to   {opacity:1; transform: translateY(0);}
+}
+</style>
+
+
+<section id="juegoJ" class="hidden">
+
+  <h2 style="text-align:center;color:#7dd3fc;font-size:34px;margin-bottom:10px;">
+    🧠 Quiz TAC — Creado por <span style="color:#c084fc">Junior Solano</span>
+  </h2>
+
+  <!-- ⭐ PANTALLA DE INICIO -->
+  <div id="startJ" style="
+      background:linear-gradient(135deg,#111a2c,#0c1524);
+      padding:35px;
+      margin-top:20px;
+      border-radius:18px;
+      border:1px solid rgba(110,150,255,0.25);
+      box-shadow:0 0 25px rgba(0,0,0,0.55);
+      text-align:center;
+  ">
+      <h2 style="font-size:28px;color:#93c5fd;margin-bottom:8px">¿Listo para comenzar? 📘</h2>
+
+      <p style="color:#b4bfd7;font-size:16px;max-width:550px;margin:auto;line-height:1.6;">
+        Este quiz evalúa tus conocimientos sobre las 
+        <strong style="color:#c084fc">Tecnologías para el Aprendizaje y el Conocimiento (TAC)</strong>.
+      </p>
+
+      <button onclick="openQuizJ()" 
+        style="
+          margin-top:22px;
+          padding:12px 24px;
+          font-size:18px;
+          border-radius:12px;
+          border:none;
+          cursor:pointer;
+          background:#3b82f6;
+          box-shadow:0 0 18px rgba(59,130,246,0.5);
+          font-weight:700;
+          color:white;
+          transition:.25s;
+      "
+      onmouseover="this.style.transform='scale(1.06)'"
+      onmouseout="this.style.transform='scale(1)'">
+        🚀 Iniciar Quiz
+      </button>
+  </div>
+
+  <!-- ⭐ AREA DEL QUIZ -->
+  <div id="quizAreaJ" class="hidden" style="animation:fadeIn .6s ease-out;">
+
+    <!-- 🔵 Barra de progreso -->
+    <div style="
+      width:100%;
+      background:#1e293b;
+      height:14px;
+      border-radius:10px;
+      margin:20px 0;
+      overflow:hidden;
+    ">
+        <div id="progressJ" style="
+          width:0%;
+          height:100%;
+          background:#38bdf8;
+          transition:width .4s;
+        "></div>
+    </div>
+
+    <div id="quizJ"></div>
+
+    <div id="resultJ" class="hidden" style="
+        background:#0f172a;
+        padding:25px;
+        margin-top:25px;
+        border-radius:14px;
+        border:1px solid #20344f;
+        box-shadow:0 0 20px rgba(0,0,0,0.35);
+        color:#d4d9e3;
+        text-align:center;
+        animation:fadeIn .6s ease-out;
+    "></div>
+
+  </div>
+
+</section>
+
+<style>
+@keyframes fadeIn {
+  from {opacity:0; transform: translateY(8px);}
+  to   {opacity:1; transform: translateY(0);}
+}
+
+.optionJ {  
+  background:#1e293b;
+  margin:12px 0;
+  padding:14px;
+  border-radius:10px;
+  color:#cbd5e1;
+  cursor:pointer;
+  border:1px solid #32445c;
+  transition:.25s;
+}
+.optionJ:hover {
+  background:#334155;
+  transform:scale(1.02);
+}
+.correct {
+  background:#059669 !important;
+  border-color:#34d399 !important;
+}
+.wrong {
+  background:#dc2626 !important;
+  border-color:#f87171 !important;
+}
+</style>
+<style>
+@keyframes fadeIn {
+  from {opacity:0; transform: translateY(8px);}
+  to   {opacity:1; transform: translateY(0);}
+}
+</style>
+
+</section>
+
+<script>
+/* ================================
+   🔊 SONIDOS BASE64 (Sin archivos externos)
+================================ */
+const snd_correct = new Audio("data:audio/mp3;base64,//uQxAAAAAAAAAAAAAAAAAAAA…"); 
+const snd_wrong   = new Audio("data:audio/mp3;base64,//uQxAAAAAAAAAAAAAAAAAAAA…");  
+const snd_final   = new Audio("data:audio/mp3;base64,//uQxAAAAAAAAAAAAAAAAAAAA…");
+
+/* ================================
+    ❓ PREGUNTAS DEL QUIZ (12)
+================================ */
+const QUESTIONS_J = [
+  {
+    q: "¿Qué significa TAC?",
+    options: ["Tecnologías de Aprendizaje y Conocimiento", "Técnicas Avanzadas de Computación", "Telecomunicaciones Aplicadas al Conocimiento"],
+    correct: 0
+  },
+  {
+    q: "¿Cuál de estas es una herramienta TAC?",
+    options: ["Facebook personal", "Google Classroom", "Spotify"],
+    correct: 1
+  },
+  {
+    q: "¿Para qué sirven las TAC?",
+    options: ["Para mejorar el aprendizaje con tecnología", "Solo para entretenimiento", "Para reemplazar a los profesores"],
+    correct: 0
+  },
+  {
+    q: "¿Cuál de estas NO es una TAC?",
+    options: ["Khan Academy", "Moodle", "WhatsApp Estado"],
+    correct: 2
+  },
+  {
+    q: "¿Qué plataforma permite clases virtuales estructuradas?",
+    options: ["Moodle", "Netflix", "TikTok"],
+    correct: 0
+  },
+  {
+    q: "¿Qué herramienta es ideal para trabajo colaborativo?",
+    options: ["Google Drive", "Photoshop", "TikTok Live"],
+    correct: 0
+  },
+  {
+    q: "¿Qué app permite crear presentaciones interactivas?",
+    options: ["Genially", "Notepad", "Steam"],
+    correct: 0
+  },
+  {
+    q: "¿Cuál recurso permite videos educativos?",
+    options: ["YouTube EDU", "Instagram Reels", "Discord Server"],
+    correct: 0
+  },
+  {
+    q: "¿Qué TAC es útil para mapas mentales colaborativos?",
+    options: ["Miro", "WhatsApp", "Pinterest"],
+    correct: 0
+  },
+  {
+    q: "¿Cuál TAC permite cuestionarios interactivos?",
+    options: ["Kahoot", "Word", "Paint"],
+    correct: 0
+  },
+  {
+    q: "¿Qué TAC usarías para evaluar en línea?",
+    options: ["Quizziz", "Blender", "Adobe Lightroom"],
+    correct: 0
+  },
+  {
+    q: "¿Cuál TAC ayuda a organizar tareas del equipo?",
+    options: ["Trello", "Snapchat", "Camera360"],
+    correct: 0
+  }
+];
+
+/* ================================
+    ⏱ VARIABLES DEL JUEGO
+================================ */
+let J_index = 0;
+let J_score = 0;
+let J_startTime = null;
+
+/* ================================
+    🚀 GENERAR QUIZ
+================================ */
+function startQuizJ() {
+  J_index = 0;
+  J_score = 0;
+  J_startTime = Date.now();
+
+  document.getElementById("resultJ").classList.add("hidden");
+  showQuestionJ();
+}
+
+function showQuestionJ() {
+  const qBox = document.getElementById("quizJ");
+  const q = QUESTIONS_J[J_index];
+
+  qBox.innerHTML = `
+    <div style="background:#0e1627;padding:20px;border-radius:10px;">
+      <h3>${J_index + 1}. ${q.q}</h3>
+      ${q.options.map((opt,i)=>`
+        <button class="btn" style="
+            width:100%;
+            margin:8px 0;
+            text-align:left;
+        " onclick="answerJ(${i})">${opt}</button>
+      `).join("")}
+    </div>
+  `;
+}
+
+/* ================================
+    ✔ RESPUESTA
+================================ */
+function answerJ(choice) {
+  const q = QUESTIONS_J[J_index];
+
+  if (choice === q.correct) {
+    J_score++;
+    snd_correct.play();
+  } else {
+    snd_wrong.play();
+  }
+
+  J_index++;
+
+  if (J_index < QUESTIONS_J.length) {
+    showQuestionJ();
+  } else {
+    endQuizJ();
+  }
+}
+
+/* ================================
+    ⭐ FINAL DEL QUIZ
+================================ */
+function endQuizJ() {
+  snd_final.play();
+
+  const total = QUESTIONS_J.length;
+  const percent = Math.round((J_score / total) * 100);
+  const timeSec = Math.round((Date.now() - J_startTime) / 1000);
+
+  let rank = "";
+  if (percent >= 90) rank = "🏆 Maestro TAC";
+  else if (percent >= 80) rank = "🔥 Experto TAC";
+  else if (percent >= 60) rank = "📘 Estudiante TAC";
+  else rank = "🌱 Aprendiz en progreso";
+
+  // CONFETTI (solo si 80%+)
+  if (percent >= 80) confettiEffectJ();
+
+  document.getElementById("quizJ").innerHTML = "";
+  const r = document.getElementById("resultJ");
+
+  r.classList.remove("hidden");
+  r.innerHTML = `
+    <h3>Resultados Finales</h3>
+    <p><strong>Aciertos:</strong> ${J_score}/${total}</p>
+    <p><strong>Porcentaje:</strong> ${percent}%</p>
+    <p><strong>Tiempo empleado:</strong> ${timeSec} segundos</p>
+    <p><strong>Rango:</strong> ${rank}</p>
+    <button class="btn" onclick="startQuizJ()">Reintentar</button>
+  `;
+}
+
+/* ================================
+    🎉 EFECTO CONFETTI
+================================ */
+function confettiEffectJ() {
+  for (let i = 0; i < 80; i++) {
+    const c = document.createElement("div");
+    c.style.position = "fixed";
+    c.style.top = "-10px";
+    c.style.left = Math.random() * 100 + "vw";
+    c.style.width = "8px";
+    c.style.height = "12px";
+    c.style.background = `hsl(${Math.random()*360},90%,60%)`;
+    c.style.opacity = 0.85;
+    c.style.transform = "rotate(" + (Math.random()*360) + "deg)";
+    c.style.animation = "fallJ 1.8s linear forwards";
+    c.style.zIndex = 99999;
+    document.body.appendChild(c);
+
+    setTimeout(()=>c.remove(),1900);
+  }
+}
+
+</script>
+
+<style>
+@keyframes fallJ {
+  from { transform: translateY(0); }
+  to   { transform: translateY(100vh); opacity:0; }
+}
+</style>
+</section>
+
+<section id="recursos" class="hidden">
+  <h2 style="text-align:center;font-size:32px;color:#7dd3fc;margin-bottom:20px;">
+    📚 Recursos, Bibliografía y Herramientas Consultadas
+  </h2>
+
+  <div style="
+    background:#0f172a;
+    padding:30px;
+    border-radius:18px;
+    border:1px solid #1e3a5f;
+    box-shadow:0 0 28px rgba(0,0,0,0.35);
+    max-width:900px;
+    margin:auto;
+    color:#cbd5e1;
+    line-height:1.7;
+  ">
+
+    <h3 style="color:#93c5fd;font-size:26px;margin-bottom:12px;">📘 Bibliografía Académica</h3>
+    <ul style="padding-left:20px;">
+      <li>
+        Area, M. (2010). <em>Las TIC y las TAC en la educación contemporánea</em>.  
+        Universidad de La Laguna.
+      </li>
+      <li>
+        Cabero, J. (2014). <em>Tecnologías educativas: teoría y práctica</em>. Editorial Síntesis.
+      </li>
+      <li>
+        Coll, C. & Monereo, C. (2012). <em>Psicología de la educación virtual</em>. Ediciones Morata.
+      </li>
+      <li>
+        Salinas, J. (2015). <em>Innovación educativa con tecnología</em>. Universidad de Islas Baleares.
+      </li>
+    </ul>
+
+    <h3 style="color:#93c5fd;font-size:26px;margin-top:28px;">🛠️ Herramientas Digitales Analizadas</h3>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:15px;margin-top:12px;">
+
+      <div style="background:#1e293b;padding:15px;border-radius:12px;border:1px solid #2f3f5a;">
+        <strong style="color:#93c5fd;">Canva</strong><br>
+        <span style="color:#a7b4c9;">Diseño gráfico, infografías educativas visuales.</span>
+      </div>
+
+      <div style="background:#1e293b;padding:15px;border-radius:12px;border:1px solid #2f3f5a;">
+        <strong style="color:#93c5fd;">Genially</strong><br>
+        <span style="color:#a7b4c9;">Presentaciones y recursos interactivos avanzados.</span>
+      </div>
+
+      <div style="background:#1e293b;padding:15px;border-radius:12px;border:1px solid #2f3f5a;">
+        <strong style="color:#93c5fd;">Google Docs / Drive</strong><br>
+        <span style="color:#a7b4c9;">Trabajo colaborativo en la nube.</span>
+      </div>
+
+      <div style="background:#1e293b;padding:15px;border-radius:12px;border:1px solid #2f3f5a;">
+        <strong style="color:#93c5fd;">Miro</strong><br>
+        <span style="color:#a7b4c9;">Mapas mentales, esquemas y pizarras colaborativas.</span>
+      </div>
+
+      <div style="background:#1e293b;padding:15px;border-radius:12px;border:1px solid #2f3f5a;">
+        <strong style="color:#93c5fd;">Padlet</strong><br>
+        <span style="color:#a7b4c9;">Murales digitales para lluvia de ideas y contenido.</span>
+      </div>
+
+    </div>
+
+    <h3 style="color:#93c5fd;font-size:26px;margin-top:30px;">🌐 Fuentes Complementarias</h3>
+    <ul style="padding-left:20px;">
+      <li>UNESCO — Recursos sobre educación digital.</li>
+      <li>OEI — Biblioteca digital para tecnología educativa.</li>
+      <li>Google for Education — Guía de herramientas pedagógicas.</li>
+      <li>Eduteka — Artículos sobre innovación y TIC/TAC.</li>
+    </ul>
+  
+  </div>
+</section>
+
+<footer style="text-align:center;color:#9ca3af;margin-top:20px">Blog-Juego TAC — Creado por Kamila Bonilla &amp; Junior Solano — Ingeniería Mecatrónica</footer>
+<script>
+/* =========================
+   NAVEGACIÓN
+   ========================= */
+function hideAllSections(){
+  document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
+}
+function show(id){
+  hideAllSections();
+  const el = document.getElementById(id);
+  if(el) el.classList.remove('hidden');
+}
+
+/* wire header buttons (they exist in Parte1) */
+document.querySelectorAll('header .btn').forEach(btn=>{
+  btn.addEventListener('click', (e)=>{
+    // buttons in header call inline show in Parte1; this is fallback
+  });
+});
+
+/* default view */
+show('inicio');
+
+/* =========================
+   JUEGO KAMILA — 5x5 (12 pares + 1 bonus)
+   ========================= */
+/* =========================================================
+   ⏳ Mostrar pantalla de inicio y luego el juego
+=========================================================*/
+function startGameScreenK(){
+    document.getElementById("startK").classList.add("hidden");
+    document.getElementById("gameAreaK").classList.remove("hidden");
+    startGameK();
+}
+function startGameK(){
+  // ocultar pantalla inicial y mostrar HUD y tablero
+  document.getElementById("startScreenK").classList.add("hidden");
+  document.getElementById("boardK").classList.remove("hidden");
+  document.getElementById("hudK").classList.remove("hidden");
+  document.getElementById("controlsK").classList.remove("hidden");
+  document.getElementById("lbK").classList.remove("hidden");
+
+
+
+
+  // reset
+  stopTimer();
+  boardK.innerHTML = '';
+  deckK = buildDeck25();
+  firstK = null; secondK=null; lockK=false;
+  movesK = 0; matchesK = 0; secondsK = 0;
+
+  movesKElem.textContent = '0';
+  matchesKElem.textContent = '0';
+  timerKElem.textContent = '00:00';
+  renderTop3();
+
+  deckK.forEach((card, idx) => {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'card-face card';
+    wrapper.setAttribute('data-idx', idx);
+
+    const inner = document.createElement('div'); 
+    inner.className = 'card-inner';
+
+    const front = document.createElement('div'); 
+    front.className='card-front'; 
+    front.textContent='■';
+
+    const back = document.createElement('div'); 
+    back.className='card-back';
+    back.textContent = card.bonus ? '✨ PISTA' : card.term;
+
+    inner.appendChild(front);
+    inner.appendChild(back);
+    wrapper.appendChild(inner);
+
+    wrapper.addEventListener('click', ()=> onCardK(wrapper, card, idx));
+    boardK.appendChild(wrapper);
+  });
+
+  startTimer();
+}
+
+const WORDS_K = [
+  'TAC','Google Docs','Padlet','Canva','Genially','Miro','Kahoot','Flip','Notion','Trello','Gamificación','Microlearning'
+];
+
+let deckK = [];
+let firstK = null;
+let secondK = null;
+let lockK = false;
+let movesK = 0;
+let matchesK = 0;
+let secondsK = 0;
+let timerIntervalK = null;
+
+const boardK = document.getElementById('boardK');
+const timerKElem = document.getElementById('timerK');
+const movesKElem = document.getElementById('movesK');
+const matchesKElem = document.getElementById('matchesK');
+const top3KElem = document.getElementById('top3K');
+
+function shuffle(arr){
+  for(let i = arr.length-1; i>0; i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function buildDeck25(){
+  // build 24 items (12 pairs) then insert a bonus card at center (index 12)
+  const pairs = [...WORDS_K, ...WORDS_K]; // 24
+  shuffle(pairs);
+  const deck = [];
+  let j=0;
+  for(let i=0;i<25;i++){
+    if(i===12){
+      deck.push({term:'BONUS', bonus:true});
+    } else {
+      deck.push({term:pairs[j], bonus:false});
+      j++;
+    }
+  }
+  return deck;
+}
+
+function startTimer(){
+  stopTimer();
+  secondsK = 0;
+  timerKElem.textContent = '00:00';
+  timerIntervalK = setInterval(()=>{
+    secondsK++;
+    const mm = String(Math.floor(secondsK/60)).padStart(2,'0');
+    const ss = String(secondsK%60).padStart(2,'0');
+    timerKElem.textContent = `${mm}:${ss}`;
+  },1000);
+}
+function stopTimer(){ if(timerIntervalK) clearInterval(timerIntervalK); timerIntervalK=null; }
+
+function renderTop3(){
+  const arr = JSON.parse(localStorage.getItem('tac_top3_kamila') || '[]');
+  top3KElem.innerHTML = '';
+  if(arr.length===0){
+    const li = document.createElement('li'); li.textContent = 'No hay registros';
+    top3KElem.appendChild(li);
+    return;
+  }
+  arr.forEach(it=>{
+    const li = document.createElement('li');
+    li.textContent = `${formatTime(it.seconds)} — ${it.moves} mov — ${new Date(it.date).toLocaleString()}`;
+    top3KElem.appendChild(li);
+  });
+}
+
+function formatTime(s){
+  const m = String(Math.floor(s/60)).padStart(2,'0');
+  const sec = String(s%60).padStart(2,'0');
+  return `${m}:${sec}`;
+}
+
+function startGameK(){
+  // reset
+  stopTimer();
+  boardK.innerHTML = '';
+  deckK = buildDeck25();
+  firstK = null; secondK=null; lockK=false;
+  movesK = 0; matchesK = 0; secondsK = 0;
+  movesKElem.textContent = '0';
+  matchesKElem.textContent = '0';
+  timerKElem.textContent = '00:00';
+  renderTop3();
+
+  // render cards
+  deckK.forEach((card, idx) => {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'card-face card';
+    wrapper.setAttribute('data-idx', idx);
+    if(card.bonus) wrapper.classList.add('center-bonus');
+
+    const inner = document.createElement('div'); inner.className = 'card-inner';
+    const front = document.createElement('div'); front.className='card-front'; front.textContent='■';
+    const back = document.createElement('div'); back.className='card-back';
+    back.textContent = card.bonus ? '✨ PISTA' : card.term;
+
+    inner.appendChild(front); inner.appendChild(back); wrapper.appendChild(inner);
+
+    wrapper.addEventListener('click', ()=> onCardK(wrapper, card, idx));
+    boardK.appendChild(wrapper);
+  });
+
+  // start timer
+  startTimer();
+}
+
+function onCardK(el, card, idx){
+  if(lockK) return;
+  if(el.classList.contains('flipped') || el.classList.contains('matched')) return;
+
+  // if bonus, reveal briefly
+  if(card.bonus){
+    el.classList.add('flipped');
+    setTimeout(()=> el.classList.remove('flipped'), 900);
+    return;
+  }
+
+  el.classList.add('flipped');
+
+  if(!firstK){
+    firstK = {el, term:card.term, idx};
+    return;
+  }
+
+  secondK = {el, term:card.term, idx};
+  lockK = true;
+  movesK++;
+  movesKElem.textContent = movesK;
+
+  if(firstK.term === secondK.term){
+    // match
+    setTimeout(()=>{
+      firstK.el.classList.add('matched');
+      secondK.el.classList.add('matched');
+      firstK = null; secondK = null; lockK=false;
+      matchesK++;
+      matchesKElem.textContent = matchesK;
+      if(matchesK === WORDS_K.length){
+        // all pairs found
+        stopTimer();
+        // prompt to save
+        setTimeout(()=>{
+          const save = confirm(`¡Ganaste! Tiempo ${formatTime(secondsK)} — Movimientos: ${movesK}\n¿Deseas guardar este resultado en Top 3?`);
+          if(save) saveResult();
+        },300);
+      }
+    },300);
+  } else {
+    // not match
+    setTimeout(()=>{
+      firstK.el.classList.remove('flipped');
+      secondK.el.classList.remove('flipped');
+      firstK = null; secondK = null; lockK=false;
+    },700);
+  }
+}
+
+/* hint: reveals a matching pair briefly */
+function hint(){
+  const nodes = Array.from(boardK.children);
+  const map = {};
+  for(let i=0;i<nodes.length;i++){
+    const n = nodes[i];
+    if(n.classList.contains('matched')) continue;
+    const idx = +n.getAttribute('data-idx');
+    const item = deckK[idx];
+    if(item.bonus) continue;
+    if(map[item.term] === undefined) map[item.term] = i;
+    else {
+      // reveal both
+      nodes[map[item.term]].classList.add('flipped');
+      nodes[i].classList.add('flipped');
+      setTimeout(()=>{
+        if(!nodes[map[item.term]].classList.contains('matched')) nodes[map[item.term]].classList.remove('flipped');
+        if(!nodes[i].classList.contains('matched')) nodes[i].classList.remove('flipped');
+      },900);
+      return;
+    }
+  }
+  alert('No se encontró par disponible para mostrar como pista.');
+}
+
+/* save top3 */
+function saveResult(){
+  try{
+    const arr = JSON.parse(localStorage.getItem('tac_top3_kamila') || '[]');
+    arr.push({moves: movesK, seconds: secondsK, date: new Date().toISOString()});
+    arr.sort((a,b)=> (a.seconds - b.seconds) || (a.moves - b.moves));
+    const top3 = arr.slice(0,3);
+    localStorage.setItem('tac_top3_kamila', JSON.stringify(top3));
+    alert('Resultado guardado.');
+    renderTop3();
+  } catch(e){ console.warn(e); alert('No se pudo guardar.'); }
+}
+
+/* attach controls */
+document.getElementById('restartK').addEventListener('click', ()=> startGameK());
+document.getElementById('hintK').addEventListener('click', ()=> hint());
+document.getElementById('saveK').addEventListener('click', ()=> saveResult());
+
+/* initialize */
+renderTop3();
+startGameK();
+
+/* =========================
+   QUIZ JUNIOR (micro-quiz)
+   ========================= */
+const QUIZ = [
+  {q:'¿Qué significa TAC?', options:['Tecnología para el Aprendizaje y el Conocimiento','Técnicas Analíticas Computacionales','Transmisión de Audio y Contenido'], a:0},
+  {q:'¿Cuál es una herramienta para infografías?', options:['Canva','Trello','Proteus'], a:0},
+  {q:'¿Qué permite la colaboración en tiempo real?', options:['Google Docs','Kahoot','Flip'], a:0},
+  {q:'¿Qué es gamificación?', options:['Uso de elementos de juego en aprendizaje','Un simulador de circuitos','Un tipo de evaluación'], a:0},
+  {q:'¿Qué herramienta se usa para mapas mentales?', options:['Miro','Loom','Quizlet'], a:0}
+];
+
+function openQuizJ(){
+    // Oculta pantalla de inicio
+    document.getElementById("startJ").classList.add("hidden");
+    // Muestra área del quiz
+    document.getElementById("quizAreaJ").classList.remove("hidden");
+    // Corre el quiz
+    startQuizJ();
+}
+
+
+function startQuizScreenJ(){
+    document.getElementById("startJ").classList.add("hidden");
+    document.getElementById("quizAreaJ").classList.remove("hidden");
+    startQuizJ();
+}
+
+function showQuestionJ() {
+  const qBox = document.getElementById("quizJ");
+  const q = QUESTIONS_J[J_index];
+
+  qBox.innerHTML = `
+    <div style="
+      background:#0e1627;
+      padding:25px;
+      border-radius:14px;
+      border:1px solid #23395b;
+      box-shadow:0 0 12px rgba(0,0,0,0.3);
+      animation:fadeIn .4s ease-out;
+    ">
+      <h3 style="color:#93c5fd;margin-bottom:15px;font-size:22px;">
+        ${J_index + 1}. ${q.q}
+      </h3>
+
+      ${q.options.map((opt,i)=>`
+        <button class="btn" style="
+            width:100%;
+            margin:10px 0;
+            padding:12px;
+            font-size:15px;
+            border-radius:10px;
+            background:#1a2436;
+            text-align:left;
+            transition:.25s;
+        " 
+        onmouseover="this.style.transform='scale(1.02)'"
+        onmouseout="this.style.transform='scale(1)'"
+        onclick="answerJ(${i}, this)">
+          ${opt}
+        </button>
+      `).join("")}
+    </div>
+  `;
+}
+
+function answerJ(choice, buttonEl) {
+  const q = QUESTIONS_J[J_index];
+
+  const buttons = document.querySelectorAll("#quizJ button");
+  buttons.forEach(b => b.disabled = true);
+
+  if (choice === q.correct) {
+    J_score++;
+    buttonEl.style.background = '#22c55e';  // verde
+    snd_correct.play();
+  } else {
+    buttonEl.style.background = '#ef4444';  // rojo
+
+    // Mostrar cuál era la correcta
+    buttons[q.correct].style.background = '#22c55e';
+    snd_wrong.play();
+  }
+
+  J_index++;
+
+  setTimeout(() => {
+    if (J_index < QUESTIONS_J.length) showQuestionJ();
+    else endQuizJ();
+  }, 800);
+}
+function endQuizJ() {
+  snd_final.play();
+
+  const total = QUESTIONS_J.length;
+  const percent = Math.round((J_score / total) * 100);
+  const timeSec = Math.round((Date.now() - J_startTime) / 1000);
+
+  let rank = "";
+  let rankIcon = "";
+
+  if (percent >= 90) { rank = "🏆 Maestro TAC"; rankIcon="🌟"; }
+  else if (percent >= 80) { rank = "🔥 Experto TAC"; rankIcon="💡"; }
+  else if (percent >= 60) { rank = "📘 Estudiante TAC"; rankIcon="📘"; }
+  else { rank = "🌱 En formación"; rankIcon="🌱"; }
+
+  if (percent >= 80) confettiEffectJ();
+
+  const r = document.getElementById("resultJ");
+  document.getElementById("quizJ").innerHTML = "";
+  r.classList.remove("hidden");
+
+  r.innerHTML = `
+    <h2 style="color:#93c5fd">${rankIcon} Resultado Final</h2>
+    <p><strong>Aciertos:</strong> ${J_score}/${total}</p>
+    <p><strong>Porcentaje:</strong> ${percent}%</p>
+    <p><strong>Tiempo empleado:</strong> ${timeSec} segundos</p>
+    <p><strong>Rango obtenido:</strong> <span style="color:#c084fc">${rank}</span></p>
+
+    <button class="btn" onclick="startQuizScreenJ()" style="margin-top:18px">
+      🔁 Reintentar Quiz
+    </button>
+  `;
+}
+
+
+function initQuiz(){
+  const out = document.getElementById('quiz');
+  out.innerHTML = '';
+  QUIZ.forEach((it, idx)=>{
+    const box = document.createElement('div');
+    box.style.background = '#0f1720';
+    box.style.padding = '10px';
+    box.style.marginBottom = '10px';
+    box.style.borderRadius = '8px';
+
+    const q = document.createElement('div');
+    q.textContent = `${idx+1}. ${it.q}`;
+    q.style.fontWeight = '700';
+    box.appendChild(q);
+
+    it.options.forEach((opt, iOpt)=>{
+      const b = document.createElement('button');
+      b.className = 'btn';
+      b.style.display = 'block';
+      b.style.marginTop = '8px';
+      b.textContent = opt;
+      b.onclick = ()=>{
+        // lock choices for this question
+        Array.from(box.querySelectorAll('button')).forEach(x=>x.disabled=true);
+        if(iOpt === it.a){ b.style.background = '#00ff9d'; }
+        else { b.style.background = '#ff4d6d'; }
+      };
+      box.appendChild(b);
+    });
+
+    out.appendChild(box);
+  });
+
+  const finish = document.createElement('div');
+  finish.style.marginTop = '12px';
+  const btn = document.createElement('button');
+  btn.className = 'btn';
+  btn.textContent = 'Terminar y ver puntaje';
+  btn.onclick = ()=>{
+    let correct = 0;
+    QUIZ.forEach((it, idx)=>{
+      const box = out.children[idx];
+      const buttons = Array.from(box.querySelectorAll('button'));
+      buttons.forEach((b, i)=>{ if(b.disabled && i === it.a) correct++; });
+    });
+    alert(`Resultado: ${correct} / ${QUIZ.length}`);
+  };
+  finish.appendChild(btn);
+  out.appendChild(finish);
+}
+
+/* oj */
+window.show = show;
+window.startGameK = startGameK;
+window.initQuiz = initQuiz;
+
+
+/* oj */
+window.show = show;
+window.startGameK = startGameK;
+window.initQuiz = initQuiz;
+</script>
+</div> <!-- end  -->
+</body>
+</html>
